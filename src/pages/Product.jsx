@@ -1,0 +1,8 @@
+import React, {useEffect, useMemo, useState} from 'react';
+import {Link, useLocation, useNavigate, useParams, Navigate} from 'react-router-dom';
+import Icon from '../components/Icon.jsx';
+import ProductCard from '../components/ProductCard.jsx';
+import Empty from '../components/Empty.jsx';
+import {img, products, categoryCards, collectionCards, weddingFilters} from '../data/products.js';
+
+export default function Product({add,wish,toggleWish}){const {id}=useParams(); const p=products.find(x=>x.id===id)||products[0]; const [qty,setQty]=useState(1); const nav=useNavigate(); return <main className="page product-detail"><div className="detail-img"><img src={p.img} alt={p.name}/></div><div className="detail-info"><p className="eyebrow">{p.category}{p.type?' · '+p.type:''}</p><h1>{p.name}</h1><div className="price">Rs.{p.price.toFixed(2)}</div><p>Personalize this beautiful invitation with your event details. This demo store keeps the purchase journey fully interactive.</p><div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}><Icon name="minus"/></button><span>{qty}</span><button onClick={()=>setQty(qty+1)}><Icon name="plus"/></button></div><div className="detail-actions"><button className="btn" onClick={()=>{add(p.id,qty);nav('/cart')}}>Buy Now</button><button className="outline" onClick={()=>add(p.id,qty)}>Add to Cart</button><button className={'icon-btn '+(wish.includes(p.id)?'liked':'')} onClick={()=>toggleWish(p.id)}><Icon name="heart"/></button></div><div className="trust"><span><Icon name="check"/> Instant confirmation</span><span><Icon name="check"/> Secure demo checkout</span><span><Icon name="check"/> Responsive design</span></div></div></main>}

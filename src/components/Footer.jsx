@@ -1,0 +1,5 @@
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {img} from '../data/products.js';
+
+export default function Footer(){return <footer><div className="footer-main"><div><Link className="brand-logo footer-brand" to="/"><span className="logo-ring small"><img src={img('logo')}/><strong>Cherish<br/>Buy</strong></span><span className="brand-name">Well<br/>Knot<br/>Craft</span></Link><p>Elegant invitations for beautiful beginnings.</p></div><div><h3>Explore</h3><Link to="/category/Wedding Cards">Wedding Cards</Link><Link to="/category/Theme Cards">Theme Cards</Link><Link to="/category/Digital Invitation">Digital Invitations</Link><Link to="/category/Scroll Invitation">Scroll Invitations</Link><Link to="/wishlist">Wishlist</Link></div><div><h3>Help</h3><Link to="/about">About Us</Link><Link to="/contact">Contact Us</Link><Link to="/faq">FAQ</Link><Link to="/cart">Cart</Link></div></div><div className="footer-bottom">© 2026 Cherish Buy · Well Knot Craft · React + JavaScript project</div></footer>}

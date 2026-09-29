@@ -1,0 +1,8 @@
+import React, {useEffect, useMemo, useState} from 'react';
+import {Link, useLocation, useNavigate, useParams, Navigate} from 'react-router-dom';
+import Icon from '../components/Icon.jsx';
+import ProductCard from '../components/ProductCard.jsx';
+import Empty from '../components/Empty.jsx';
+import {img, products, categoryCards, collectionCards, weddingFilters} from '../data/products.js';
+
+export default function Cart({cart,change,remove,user}){const nav=useNavigate(); const items=cart.map(x=>({...x,p:products.find(p=>p.id===x.id)})).filter(x=>x.p); const subtotal=items.reduce((s,x)=>s+x.p.price*x.qty,0); return <main className="page"><h1>Your Cart</h1>{items.length?<div className="cart-layout"><div>{items.map(({p,qty})=><div className="cart-row" key={p.id}><img src={p.img} alt=""/><div className="grow"><h3>{p.name}</h3><p>Rs.{p.price.toFixed(2)}</p><div className="qty"><button onClick={()=>change(p.id,-1)}><Icon name="minus"/></button><span>{qty}</span><button onClick={()=>change(p.id,1)}><Icon name="plus"/></button></div></div><strong>Rs.{(p.price*qty).toFixed(2)}</strong><button className="icon-btn" onClick={()=>remove(p.id)}><Icon name="x"/></button></div>)}</div><aside className="summary"><h2>Order Summary</h2><div><span>Subtotal</span><b>Rs.{subtotal.toFixed(2)}</b></div><div><span>Delivery</span><b>Free</b></div><hr/><div className="total"><span>Total</span><b>Rs.{subtotal.toFixed(2)}</b></div><button className="btn full" onClick={()=>user?nav('/checkout'):nav('/login?return=checkout')}>Checkout</button><button className="outline full" onClick={()=>nav('/category/Wedding Cards')}>Continue Shopping</button></aside></div>:<Empty text="Your cart is empty" action="Continue Shopping" to="/category/Wedding Cards"/>}</main>}

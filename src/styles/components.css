@@ -1,0 +1,3 @@
+/* Component-level refinements. Main visual system is in styles/global.css. */
+.product-card button{cursor:pointer}
+.product-card button.liked{color:#c44}
